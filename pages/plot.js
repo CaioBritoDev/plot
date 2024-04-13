@@ -74,17 +74,8 @@ export default function Graph() {
     }
   }, [labels, values]);
 
-  // Dynamically adjust chart container height based on number of labels
-  useEffect(() => {
-    if (containerRef.current) {
-      const numLabels = labels.length;
-      const minHeight = 50 * numLabels; // Assuming 50px height for each label
-      containerRef.current.style.height = `${Math.max(minHeight, 500)}px`; // Minimum height of 500px
-    }
-  }, [labels]);
-
   return (
-    <div id="chart-container" ref={containerRef} style={{ width: '100%', minHeight: '500px' }}>
+    <div id="chart-container" ref={containerRef} style={{ width: '100%', height: '450px' }}>
       <canvas id="myChart"></canvas>
     </div>
   );
