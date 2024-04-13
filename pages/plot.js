@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Chart from 'chart.js/auto';
 
@@ -6,6 +6,7 @@ export default function Graph() {
   const router = useRouter();
   const [labels, setLabels] = useState([]);
   const [values, setValues] = useState([]);
+  const chartRef = useRef(null);
 
   useEffect(() => {
     // Function to extract labels and values from query parameters
@@ -24,8 +25,14 @@ export default function Graph() {
   useEffect(() => {
     // Plot the graph when labels and values are updated
     const ctx = document.getElementById('myChart');
-    if (ctx) {
-      new Chart(ctx, {
+
+    // Destroy previous chart instance if it exists
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+
+    if (ctx && labels.length > 0 && values.length > 0) {
+      const newChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: labels,
@@ -39,6 +46,9 @@ export default function Graph() {
         },
         options: {}
       });
+
+      // Update chartRef with the new chart instance
+      chartRef.current = newChart;
     }
   }, [labels, values]);
 
