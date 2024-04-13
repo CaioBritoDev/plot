@@ -44,7 +44,6 @@ export default function Graph() {
 
   return (
     <div>
-      <h1>Graph</h1>
       <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   );
