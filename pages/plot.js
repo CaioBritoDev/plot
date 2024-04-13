@@ -44,7 +44,27 @@ export default function Graph() {
             borderWidth: 1
           }]
         },
-        options: {}
+        options: {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = context.parsed.y;
+                  return `R$ ${value.toFixed(2).replace('.', ',')}`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              ticks: {
+                callback: function(value) {
+                  return `R$ ${value.toFixed(2).replace('.', ',')}`;
+                }
+              }
+            }
+          }
+        }
       });
 
       // Update chartRef with the new chart instance
@@ -54,6 +74,7 @@ export default function Graph() {
 
   return (
     <div>
+      <h1>Graph</h1>
       <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   );
