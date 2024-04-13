@@ -1,7 +1,7 @@
 {
   "name": "plot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "plot.js",
   "scripts": {
     "dev": "next dev"
   },
