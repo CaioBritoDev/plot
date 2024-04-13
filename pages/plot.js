@@ -7,6 +7,7 @@ export default function Graph() {
   const [labels, setLabels] = useState([]);
   const [values, setValues] = useState([]);
   const chartRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     // Function to extract labels and values from query parameters
@@ -24,14 +25,13 @@ export default function Graph() {
 
   useEffect(() => {
     // Plot the graph when labels and values are updated
-    const ctx = document.getElementById('myChart');
-
-    // Destroy previous chart instance if it exists
     if (chartRef.current) {
-      chartRef.current.destroy();
-    }
-
-    if (ctx && labels.length > 0 && values.length > 0) {
+      const newChart = chartRef.current;
+      newChart.data.labels = labels;
+      newChart.data.datasets[0].data = values;
+      newChart.update();
+    } else if (labels.length > 0 && values.length > 0) {
+      const ctx = document.getElementById('myChart');
       const newChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -45,6 +45,8 @@ export default function Graph() {
           }]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             tooltip: {
               callbacks: {
@@ -72,10 +74,18 @@ export default function Graph() {
     }
   }, [labels, values]);
 
+  // Dynamically adjust chart container height based on number of labels
+  useEffect(() => {
+    if (containerRef.current) {
+      const numLabels = labels.length;
+      const minHeight = 50 * numLabels; // Assuming 50px height for each label
+      containerRef.current.style.height = `${Math.max(minHeight, 500)}px`; // Minimum height of 500px
+    }
+  }, [labels]);
+
   return (
-    <div>
-      <h1>Graph</h1>
-      <canvas id="myChart" width="400" height="400"></canvas>
+    <div id="chart-container" ref={containerRef} style={{ width: '100%', minHeight: '500px' }}>
+      <canvas id="myChart"></canvas>
     </div>
   );
 }
