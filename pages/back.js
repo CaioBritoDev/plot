@@ -1,4 +1,4 @@
-function Plot(labels, values) {
+function Make(labels, values) {
     // Obtenha uma referência ao elemento canvas
     var ctx = document.getElementById('myChart').getContext('2d');
 

@@ -11,14 +11,14 @@ function Plot() {
 
         <>
 
-            <body>
+            <body onLoad={Make(labels, values)}>
 
                 <canvas id="myChart" width="400" height="400"></canvas>
 
             </body>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="./back.js"></script>
-            
+
         </>
 
 
