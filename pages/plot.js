@@ -39,8 +39,8 @@ export default function Graph() {
           datasets: [{
             label: 'Valor Bruto Arrecadado',
             data: values,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(123, 80, 160, 0.2)',
+            borderColor: 'rgba(123, 80, 160, 1)',
             borderWidth: 1
           }]
         },
