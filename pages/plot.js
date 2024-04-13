@@ -10,7 +10,7 @@ function Plot() {
     return (
 
         <>
-
+        <html>
             <body onLoad={Make(labels, values)}>
 
                 <canvas id="myChart" width="400" height="400"></canvas>
@@ -18,7 +18,7 @@ function Plot() {
             </body>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="../lib/back.js"></script>
-
+        </html>
         </>
 
 
